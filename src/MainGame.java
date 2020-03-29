@@ -2,6 +2,13 @@ public class MainGame {
     //field that represents
     private char[][] board = new char[3][3]; //board state
     private char currentPlayer; //current player X or O
+    private boolean want = false;
+
+//    private void wantInstructions(){
+//        if(want == "yes"){
+//            System.out.println("Instructions");
+//        }
+//    }
 
     public void initializeBoard(){
         System.out.println("Welcome to TicTacToe");
@@ -14,14 +21,14 @@ public class MainGame {
 
     public void updateBoard() {
         //update here
-        //
+        System.out.println("  1   2   3");
         System.out.print(" — — — — — — ");
         for (int i = 0; i < 3; i++) {
             System.out.print("\n| ");
             for (int j = 0; j < 3; j++) {
                 System.out.print(board[i][j] + " | ");
             }
-            System.out.print("\n — — — — — — ");
+            System.out.print((i+1) + " \n — — — — — — ");
         }
     }//update board
 
@@ -34,8 +41,8 @@ public class MainGame {
         else{currentPlayer = 'X';}
     }
 
-    public void Marker(){
-
+    public void placeMarker(int row, int col){
+        board[row][col] = currentPlayer;
     }
 
     public boolean isBoardFull(){
