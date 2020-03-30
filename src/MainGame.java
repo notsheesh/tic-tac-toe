@@ -4,12 +4,6 @@ public class MainGame {
     private char currentPlayer; //current player X or O
     private boolean want = false;
 
-//    private void wantInstructions(){
-//        if(want == "yes"){
-//            System.out.println("Instructions");
-//        }
-//    }
-
     public void initializeBoard(){
         System.out.println("Welcome to TicTacToe");
         currentPlayer = 'X'; //default
