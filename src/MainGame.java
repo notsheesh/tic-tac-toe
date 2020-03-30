@@ -30,6 +30,7 @@ public class MainGame {
             }
             System.out.print((i+1) + " \n — — — — — — ");
         }
+        System.out.println("\n");
     }//update board
 
     public char getCurrentPlayer(){
@@ -42,13 +43,19 @@ public class MainGame {
     }
 
     public boolean placeMarker(int row, int col){
-        if((row >= 0) && (row <= 3)){
+        if((row >= 0) && (row <= 3) && (board[row][col]=='-')){
             if((col >= 0) && (col <= 3)){
                 if(board[row][col]=='-'){
                     board[row][col] = currentPlayer;
                     return true;
                 }
             }
+        }
+        else{
+            System.out.println("================================");
+            System.out.println("Invalid move, please try again!");
+            System.out.println("================================");
+            updateBoard();
         }
         return false;
     }
@@ -64,48 +71,68 @@ public class MainGame {
     }
 
     public boolean isWinner(){
-        return (checkCol()||checkDiag()||checkRow());
+//        return (checkCol()||checkRow()||checkDiag());
+        return (checkRow()||checkCol()||checkDiag());
     }
 
-    private boolean checkRow(){
+    public boolean checkRow(){
         boolean[] row = new boolean[3];
-        for (int i = 0; i < 3; i++){row[i] = true;}
-
         for (int i = 0; i < 3; i++){
-            for (int j = 0; j < 3; j++){
-                if(board[i][j]=='-'){row[i] = false;}
-            }
+            row[i] = true;
+        }
+        char a, b, c;
+        for(int i = 0; i < 3; i++){
+            a = board[i][0];
+            b = board[i][1];
+            c = board[i][2];
+            row[i] = checkChar(a,b,c);
         }
         return (row[0]||row[1]||row[2]);
     }
 
-    private boolean checkCol(){
+    public boolean checkCol(){
         boolean[] col = new boolean[3];
-        for(int j = 0; j < 3; j++){col[j] = true;}
-
-        for(int j = 0; j < 3; j++){
-            for(int i = 0; i < 3; i++){
-                if(board[i][j]=='-'){col[j] = false;}
-            }
+        for(int i = 0; i < 3; i++){
+            col[i] = true;
+        }
+        char a,b,c;
+        for(int i = 0; i < 3;i ++){
+            a = board[0][i];
+            b = board[1][i];
+            c = board[2][i];
+            col[i] = checkChar(a,b,c);
         }
         return (col[0]||col[1]||col[2]);
     }
 
-    private boolean checkDiag(){
-        boolean[] dia = new boolean[3];
-        for(int i = 0; i < 3; i++){dia[i] = true;}
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
-                if(i==j){if(board[i][j]=='-'){dia[i] = false;}}
-            }
-        }
-        return (dia[0]||dia[1]||dia[2]);
+    public boolean checkDiag(){
+        char a,b,c;
+        //backslash
+        a = board[0][0];
+        b = board[1][1];
+        c = board[2][2];
+        boolean diagBack = checkChar(a,b,c);
+        //forward slash
+        a = board[0][2];
+        b = board[1][1];
+        c = board[2][0];
+        boolean diagFront = checkChar(a,b,c);
+        return (diagFront||diagBack);
     }
 
-    //main
-    public static void main(String[] args) {
-        MainGame game = new MainGame();
-        game.initializeBoard();
-//        game.updateBoard();
+    public boolean checkChar(char a, char b, char c){
+        boolean same = false;
+        if((a==b)&&(b==c)){
+            if(a!='-'){same=true;}
+        }
+        return same;
     }
-}
+
+
+        //main
+//    public static void main(String[] args) {
+//        MainGame game = new MainGame();
+//        game.initializeBoard();
+//        game.updateBoard();
+//    }
+    }
