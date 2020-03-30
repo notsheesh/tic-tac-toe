@@ -41,8 +41,16 @@ public class MainGame {
         else{currentPlayer = 'X';}
     }
 
-    public void placeMarker(int row, int col){
-        board[row][col] = currentPlayer;
+    public boolean placeMarker(int row, int col){
+        if((row >= 0) && (row <= 3)){
+            if((col >= 0) && (col <= 3)){
+                if(board[row][col]=='-'){
+                    board[row][col] = currentPlayer;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean isBoardFull(){
