@@ -123,10 +123,4 @@ public class MainGame {
     }
 
 
-        //main
-//    public static void main(String[] args) {
-//        MainGame game = new MainGame();
-//        game.initializeBoard();
-//        game.updateBoard();
-//    }
     }
