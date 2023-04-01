@@ -1,2 +1,0 @@
-// @author sciduck
-package pkgexeno;
